@@ -48,5 +48,5 @@ projeto-cadastro-alunos<br>
    git clone https://github.com/seu-usuario/projeto-cadastro-alunos.git
 Abra o arquivo index.html em seu navegador.
 
-Pronto! 🎉
+Pronto!
 
