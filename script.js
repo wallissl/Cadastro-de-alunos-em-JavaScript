@@ -28,8 +28,8 @@ form.addEventListener("submit", (e) => {
     let aluno = { nome, idade };
     alunos.push(aluno);
 
-    // atualizar lista no HTML
-    renderAlunos();
+    // adiciona só o novo aluno com animação
+    adicionarAlunoNaLista(aluno, alunos.length -1);
 
     // limpar formulário
     form.reset();
@@ -41,10 +41,12 @@ function renderAlunos() {
     if(!alunos.length){
     let mensagemInicial = document.createElement("li");
         mensagemInicial.innerText = `Nenhum aluno cadastro`;
-        lista.appendChild(mensagemInicial);       
+        lista.appendChild(mensagemInicial);
+        return;
     }
+}
 
-    alunos.forEach((aluno, index) => {
+function adicionarAlunoNaLista(aluno, index){
 
         // criar lista de alunos
         let li = document.createElement("li");
@@ -60,23 +62,25 @@ function renderAlunos() {
         li.style.maxHeight = '0px'; // Valor inicial
         li.style.overflow = 'hidden';
         li.style.transition = 'max-height 1s ease';
-        requestAnimationFrame(() => li.style.maxHeight = li.scrollHeight + 'px'); // Crescer até o tamanho real do elemento
+
+        requestAnimationFrame(() => {
+            li.style.maxHeight = li.scrollHeight + 'px'
+        }); // Crescer até o tamanho real do elemento
 
         // remover aluno correspondente
         removeLi.addEventListener("click", () => {
         li.style.maxHeight = li.scrollHeight + 'px'; // Valor inicial
-        li.style.overflow = 'hidden';
-        li.style.transition = 'max-height 0.3s ease';
+        /* li.style.overflow = 'hidden';
+        li.style.transition = 'max-height 0.3s ease'; */
 
-        requestAnimationFrame(() => li.style.maxHeight = '0px');
+        requestAnimationFrame(() => (li.style.maxHeight = '0px'));
 
         // remover o item e renderizar só depois da animação
         li.addEventListener('transitionend', () => {
             alunos.splice(index,1); // remove do array
-            renderAlunos(); // renderizar a lista novamente.
-        }, { once:true})
+        }, { once:true});
         }); 
-    })
+    }
 
     // soma das idades para tirar média
     let soma = alunos.reduce((acc, aluno) => acc + aluno.idade, 0);
@@ -93,7 +97,7 @@ function renderAlunos() {
     lista.appendChild(contadorDeItens); 
     lista.appendChild(mediaDeIdades)
     }
-}
+
 
 // deletar todos os dados do array de objetos
 deletarTudo.addEventListener("click", () => {
