@@ -1,5 +1,5 @@
 // declaração de variáveis
-let alunos = [];
+let alunos = JSON.parse(localStorage.getItem("alunos")) || [];
 let form = document.getElementById("formAluno");
 let lista = document.getElementById("listaAlunos");
 let deletarTudo = document.getElementById("deletarTudo");
@@ -19,6 +19,7 @@ form.addEventListener("submit", (e) => {
     }
 
     let alunoExiste = alunos.some(aluno => aluno.nome === nome);
+    
 
     if(alunoExiste){
         return alert("Já existe um cadastro com esse nome!");
@@ -27,10 +28,11 @@ form.addEventListener("submit", (e) => {
     // criar objeto aluno
     let aluno = { nome, idade };
     alunos.push(aluno);
+    localStorage.setItem("alunos", JSON.stringify(alunos));
 
     // adiciona só o novo aluno com animação
     adicionarAlunoNaLista(aluno, alunos.length -1);
-
+    somaEMedia()
     // limpar formulário
     form.reset();
 });
@@ -44,6 +46,9 @@ function renderAlunos() {
         lista.appendChild(mensagemInicial);
         return;
     }
+
+    alunos.forEach((aluno, index) => adicionarAlunoNaLista(aluno, index));
+    somaEMedia()
 }
 
 function adicionarAlunoNaLista(aluno, index){
@@ -51,11 +56,13 @@ function adicionarAlunoNaLista(aluno, index){
         // criar lista de alunos
         let li = document.createElement("li");
         li.textContent = `${aluno.nome} - ${aluno.idade} anos`;
+        li.style.marginTop = "8px";
         lista.appendChild(li);
 
         // criar botão remover
         let removeLi = document.createElement("button");
         removeLi.innerHTML = "Remover";
+        removeLi.style.marginLeft = "7px";
         li.appendChild(removeLi);
 
         // animação
@@ -80,8 +87,9 @@ function adicionarAlunoNaLista(aluno, index){
             alunos.splice(index,1); // remove do array
         }, { once:true});
         }); 
-    }
+}
 
+function somaEMedia(){
     // soma das idades para tirar média
     let soma = alunos.reduce((acc, aluno) => acc + aluno.idade, 0);
     let media = soma / alunos.length
@@ -97,11 +105,12 @@ function adicionarAlunoNaLista(aluno, index){
     lista.appendChild(contadorDeItens); 
     lista.appendChild(mediaDeIdades)
     }
-
+}
 
 // deletar todos os dados do array de objetos
 deletarTudo.addEventListener("click", () => {
     alunos.length = 0;
+    localStorage.setItem("alunos", JSON.stringify(alunos));
     renderAlunos();
 })
 
