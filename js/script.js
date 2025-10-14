@@ -132,7 +132,10 @@ function somaEMedia(){
 };
 
 deletarTudo.addEventListener("click", () => {
+    let confirmarDelete = confirm('Deseja apagar todos os dados?') // confirm, cria um alert com OK ou CANCELAR que retorna true ou false
+    if(confirmarDelete){
     alunos.length = 0; // deletar todos os dados do array de objetos
     localStorage.setItem("alunos", JSON.stringify(alunos));
     renderAlunos();
+    }
 });
