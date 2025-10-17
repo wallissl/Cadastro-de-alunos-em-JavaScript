@@ -1,5 +1,5 @@
 import {validar, somaEMedia} from './utils.js';
-import { renderAlunos, adicionarAlunoNaLista, removerAluno } from './dom.js';
+import { renderAlunos, adicionarAlunoNaLista } from './dom.js';
 // Variáveis
 let alunos = JSON.parse(localStorage.getItem("alunos")) || [];
 let form = document.getElementById("formAluno");
@@ -21,8 +21,7 @@ form.addEventListener("submit", (e) => {
     alunos.push(aluno);
     localStorage.setItem("alunos", JSON.stringify(alunos));
 
-    adicionarAlunoNaLista(aluno, lista); // adiciona novo aluno na lista
-    removerAluno(lista, removeLi)
+    adicionarAlunoNaLista(aluno, lista, alunos); // adiciona novo aluno na lista
     somaEMedia(alunos, lista); // informações de soma e media no final da lista
     form.reset(); // limpar formulário
 });

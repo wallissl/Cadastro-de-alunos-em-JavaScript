@@ -11,11 +11,11 @@ export function renderAlunos(lista, alunos) {
         return;
     };
 
-    alunos.forEach((aluno) => adicionarAlunoNaLista(aluno, lista)); // Adicionar na lista e renderizar apenas o novo aluno cadastrado
+    alunos.forEach((aluno) => adicionarAlunoNaLista(aluno, lista, alunos)); // Adicionar na lista e renderizar apenas o novo aluno cadastrado
     somaEMedia(alunos, lista);
 };
 
-export function adicionarAlunoNaLista(aluno, lista){
+export function adicionarAlunoNaLista(aluno, lista, alunos){
 
     const msg = document.getElementById("mensagem-vazia");
     if(msg) msg.remove();
@@ -41,12 +41,14 @@ export function adicionarAlunoNaLista(aluno, lista){
     requestAnimationFrame(() => li.style.maxHeight = li.scrollHeight + 'px'
     ); // crescer até o tamanho real do elemento
 
-    /* removerAluno(li, removeLi); */ // Acessar os métodos li e removeLi dentro da função removerAluno
+    removerAluno(li, removeLi, alunos, lista) // Acessar os métodos li e removeLi dentro da função removerAluno
 };
 
-export function removerAluno(li, removeLi){
+export function removerAluno(li, removeLi, alunos, lista){
+    
     // remover aluno correspondente ao ID cadastrado
     removeLi.addEventListener("click", () => {
+        console.log('entrei aqui')
     li.style.maxHeight = li.scrollHeight + 'px';
     li.style.overflow = 'hidden';
     li.style.transition = 'max-height 0.7s ease';
