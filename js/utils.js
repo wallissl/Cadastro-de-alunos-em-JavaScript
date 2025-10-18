@@ -1,15 +1,14 @@
 export function validar(nome, idade, alunos){
     
-    console.log('entrei aqui');
     if (nome === "" || isNaN(idade) || idade <=0) {
         alert("Preencha corretamente os campos!");
         return false;
     };
 
-    let alunoExiste = alunos.some(e => e.nome === nome); // método some(), verifica se algum item do array atende à condição
+    let alunoExiste = alunos.some(e => e.nome === nome); // Método some(), verifica se algum item do array atende à condição
 
     if(alunoExiste){
-         alert("Já existe um cadastro com esse nome!");
+        alert("Já existe um cadastro com esse nome!");
         return false;
     };
 
@@ -23,20 +22,20 @@ export function somaEMedia(alunos, lista){
 
     if(!alunos.length) return;
     
-    // soma das idades para tirar média
-    let soma = alunos.reduce((acc, aluno) => acc + aluno.idade, 0);
+    // Soma das idades para tirar média
+    let soma = alunos.reduce((acc, itemArray) => acc + itemArray.idade, 0);
     let media = soma / alunos.length;
     let mediaDeIdades = document.createElement("div");
     mediaDeIdades.classList.add("info-extra");
     mediaDeIdades.textContent = `Media de idades: ${media}`;
 
-    // contagem de itens na lista
+    // Contagem de itens na lista
     let contadorDeItens = document.createElement("div");
     contadorDeItens.classList.add("info-extra");
     contadorDeItens.style.marginTop = "15px";
     contadorDeItens.textContent = `Total de alunos: ${alunos.length}`;
 
-    // exibir na lista se o array não estiver vazio
+    // Exibir na lista se o array não estiver vazio
     if(alunos.length){
     lista.appendChild(contadorDeItens); 
     lista.appendChild(mediaDeIdades);
