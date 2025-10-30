@@ -1,5 +1,7 @@
 import {validar, somaEMedia} from './utils.js';
 import { renderAlunos, adicionarAlunoNaLista, removerTudo } from './dom.js';
+import Aluno from './alunos.js'
+
 // Variáveis
 let alunos = JSON.parse(localStorage.getItem("alunos")) || [];
 let form = document.getElementById("formAluno");
@@ -16,9 +18,10 @@ form.addEventListener("submit", (e) => {
     if(!validar(nome, idade, alunos)) return; // Se a validação passar segue o código normalmente
 
     // Criar objeto aluno (com Id único)
-    let aluno = { id: Date.now().toString(), nome, idade }; // Criando usuário com ID único, para que ele não se perca na hora de apagar os itens no localStore
-    alunos.push(aluno);
+    let aluno = new Aluno(Date.now().toString(), nome, idade); // Criando usuário com ID único, para que ele não se perca na hora de apagar os itens no localStore. Instanciado a classe Aluno para criação do no aluno.
+    alunos.push(aluno)
     localStorage.setItem("alunos", JSON.stringify(alunos));
+    console.log(alunos)
 
     adicionarAlunoNaLista(aluno, lista, alunos); // Adiciona novo aluno na lista
     somaEMedia(alunos, lista); // Informações de soma e media no final da lista

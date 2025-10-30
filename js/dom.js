@@ -27,6 +27,12 @@ export function adicionarAlunoNaLista(aluno, lista, alunos){
     li.dataset.id = aluno.id; // Inserir o id do aluno no DOM
     lista.appendChild(li);
 
+    // Criar botão de editar aluno
+    let editLi = document.createElement("button");
+    editLi.innerHTML = "Editar";
+    editLi.style.marginLeft = "15px";
+    li.appendChild(editLi);
+
     // Criar botão remover
     let removeLi = document.createElement("button");
     removeLi.innerHTML = "Remover";
@@ -41,7 +47,21 @@ export function adicionarAlunoNaLista(aluno, lista, alunos){
     requestAnimationFrame(() => li.style.maxHeight = li.scrollHeight + 'px'
     ); // Crescer até o tamanho real do elemento
 
-    removerAluno(li, removeLi, alunos, lista) // Acessar os métodos li e removeLi dentro da função removerAluno
+    editarLi(li, editLi, alunos, lista);
+    removerAluno(li, removeLi, alunos, lista); // Acessar os métodos li e removeLi dentro da função removerAluno
+};
+
+export function editarLi(li, editLi, alunos, lista){
+
+    editLi.addEventListener("click", () => {
+        const alunoId = li.dataset.id;
+        /* const index = alunos.findIndex(e => e.id === alunoId);
+        const aluno = alunos[index];
+        console.log(aluno.nome); */
+        const aluno = alunos.find(e => e.id == alunoId);
+        console.log(aluno.nome)
+    })
+
 };
 
 export function removerAluno(li, removeLi, alunos, lista){

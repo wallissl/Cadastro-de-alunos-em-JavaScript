@@ -37,7 +37,7 @@ export function somaEMedia(alunos, lista){
 
     // Exibir na lista se o array não estiver vazio
     if(alunos.length){
-    lista.appendChild(contadorDeItens); 
+    lista.appendChild(contadorDeItens);
     lista.appendChild(mediaDeIdades);
     };
 };
