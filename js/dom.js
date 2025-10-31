@@ -1,4 +1,4 @@
-import { somaEMedia } from "./utils.js";
+import { somaEMedia, validar } from "./utils.js";
 
 export function renderAlunos(lista, alunos) {
     lista.innerHTML = ""; // Limpa lista antes de recriar
@@ -55,11 +55,23 @@ export function editarLi(li, editLi, alunos, lista){
 
     editLi.addEventListener("click", () => {
         const alunoId = li.dataset.id;
-        /* const index = alunos.findIndex(e => e.id === alunoId);
-        const aluno = alunos[index];
-        console.log(aluno.nome); */
         const aluno = alunos.find(e => e.id == alunoId);
-        console.log(aluno.nome)
+
+        const novoNome = prompt(`Digite o novo nome:`, aluno.nome);
+        const novaIdade = parseInt(prompt(`Digite o novo nome:`, aluno.idade));
+        
+        /* if(!novoNome || !novaIdade){
+            alert("Preencha os campos corretamente")
+        }*/
+       if(!validar(novoNome, novaIdade, alunos)) return
+        aluno.nome = novoNome;
+        aluno.idade = novaIdade;
+
+        localStorage.setItem("alunos", JSON.stringify(alunos));
+
+        somaEMedia(alunos, lista);
+        renderAlunos(lista, alunos);
+        alert("Informações atualizadas com sucesso")
     })
 
 };
