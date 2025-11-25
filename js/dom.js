@@ -63,7 +63,7 @@ export function editarLi(li, editLi, alunos, lista){
         /* if(!novoNome || !novaIdade){
             alert("Preencha os campos corretamente")
         }*/
-       
+
        if(!validar(novoNome, novaIdade, alunos)) return
         aluno.nome = novoNome;
         aluno.idade = novaIdade;
@@ -90,7 +90,7 @@ export function removerAluno(li, removeLi, alunos, lista){
     // Remover o item e renderizar só depois da animação
     li.addEventListener('transitionend', () => {
         const id = li.dataset.id;
-        const idx = alunos.findIndex(e => e.id === id); // O findIndex encontra o índice corresponde e retorna sua posição, caso não encontro retorna -1 por padrão
+        const idx = alunos.findIndex(e => e.id === id); // O findIndex encontra o índice corresponde e retorna sua posição, caso não encontre, retorna -1 por padrão
         if (idx !== -1){
         alunos.splice(idx, 1); // Remove do array, splice(valor inicial, total de itens a remover, e terceiro argumento caso queira adicionar informações ao array, após o item removido
         localStorage.setItem("alunos", JSON.stringify(alunos)); // Atualiza o localStorage
