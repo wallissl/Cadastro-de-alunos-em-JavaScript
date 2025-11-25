@@ -18,7 +18,7 @@ form.addEventListener("submit", (e) => {
     if(!validar(nome, idade, alunos)) return; // Se a validação passar segue o código normalmente
 
     // Criar objeto aluno (com Id único)
-    let aluno = new Aluno(Date.now().toString(), nome, idade); // Criando usuário com ID único, para que ele não se perca na hora de apagar os itens no localStore. Instanciado a classe Aluno para criação do no aluno.
+    let aluno = new Aluno(Date.now().toString(), nome, idade); // Criando usuário com ID único, para que ele não se perca na hora de apagar os itens no localStore. Instanciando a classe Aluno para a criação de novos alunos.
     alunos.push(aluno)
     localStorage.setItem("alunos", JSON.stringify(alunos));
 

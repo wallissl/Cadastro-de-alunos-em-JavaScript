@@ -1,4 +1,3 @@
-
 export default class Aluno{
     constructor( id, nome, idade){
         this.id = id;

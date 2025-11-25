@@ -41,14 +41,14 @@ export function adicionarAlunoNaLista(aluno, lista, alunos){
 
     // Animação de entrada
     li.style.maxHeight = '0px'; // valor de inicialização da animação
-    li.style.overflow = 'hidden';
+    li.style.overflow = 'hidden'; // Esconde o conteúdo caso a animação ainda não tenha começado
     li.style.transition = 'max-height 0.7s ease';
 
     requestAnimationFrame(() => li.style.maxHeight = li.scrollHeight + 'px'
     ); // Crescer até o tamanho real do elemento
 
-    editarLi(li, editLi, alunos, lista);
-    removerAluno(li, removeLi, alunos, lista); // Acessar os métodos li e removeLi dentro da função removerAluno
+    editarLi(li, editLi, alunos, lista); // Acessar os métodos dentro da função editarLi
+    removerAluno(li, removeLi, alunos, lista); // Acessar os métodos dentro da função removerAluno
 };
 
 export function editarLi(li, editLi, alunos, lista){
@@ -57,12 +57,13 @@ export function editarLi(li, editLi, alunos, lista){
         const alunoId = li.dataset.id;
         const aluno = alunos.find(e => e.id == alunoId);
 
-        const novoNome = prompt(`Digite o novo nome:`, aluno.nome);
+        const novoNome = prompt(`Digite o novo nome:`, aluno.nome); // aluno.nome, depois da virgula, é para exibir na caixa do prompt o nome que está salvo antes da alteração
         const novaIdade = parseInt(prompt(`Digite o novo nome:`, aluno.idade));
         
         /* if(!novoNome || !novaIdade){
             alert("Preencha os campos corretamente")
         }*/
+       
        if(!validar(novoNome, novaIdade, alunos)) return
         aluno.nome = novoNome;
         aluno.idade = novaIdade;
