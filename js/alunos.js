@@ -3,5 +3,5 @@ export default class Aluno{
         this.id = id;
         this.nome = nome;
         this.idade = idade;
-    }
-}
+    };
+};
