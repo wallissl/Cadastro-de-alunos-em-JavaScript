@@ -1,4 +1,4 @@
-import {validar, somaEMedia} from './utils.js';
+import {validar, somaEMedia, filtrar} from './utils.js';
 import { renderAlunos, adicionarAlunoNaLista, removerTudo } from './dom.js';
 import Aluno from './alunos.js'
 
@@ -9,6 +9,7 @@ let lista = document.getElementById("lista");
 let deletarTudo = document.getElementById("deletarTudo");
 
 renderAlunos(lista, alunos); // Chamar função de Render ao iniciar o código
+filtrar(alunos, lista)
 
 form.addEventListener("submit", (e) => {
     e.preventDefault(); // Anula comportamento padrão do formulário

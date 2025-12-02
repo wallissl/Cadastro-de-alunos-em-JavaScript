@@ -1,3 +1,5 @@
+import { renderFiltrados, renderAlunos } from "./dom.js";
+
 export function validar(nome, idade, alunos){
     
     if (nome === "" || isNaN(idade) || idade <=0) {
@@ -41,3 +43,33 @@ export function somaEMedia(alunos, lista){
     lista.appendChild(mediaDeIdades);
     };
 };
+
+export function filtrar(alunos, lista){
+    const input = document.getElementById("filtrar");
+
+    input.addEventListener("input", () => {
+        const texto = input.value.toLowerCase();
+
+        if (texto.trim() === "") {
+            // Volta para a lista inteira
+            renderAlunos(lista, alunos);
+            return;
+        }
+
+        const filtrados = alunos.filter(e =>
+            e.nome.toLowerCase().includes(texto)
+        );
+
+        renderFiltrados(lista, filtrados, alunos);
+    });
+}
+
+/* function render(listaParaUsar = alunos){
+        lista.innerHTML = "";
+        listaParaUsar.forEach((a,i) => {
+            const li = document.createElement("li");
+            li.innerHTML = `${a.nome}`;
+            lista.appendChild(li);
+        })
+    }
+ */

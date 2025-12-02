@@ -13,6 +13,7 @@ export function renderAlunos(lista, alunos) {
 
     alunos.forEach((aluno) => adicionarAlunoNaLista(aluno, lista, alunos)); // Adicionar na lista e renderizar apenas o novo aluno cadastrado
     somaEMedia(alunos, lista);
+    
 };
 
 export function adicionarAlunoNaLista(aluno, lista, alunos){
@@ -51,14 +52,14 @@ export function adicionarAlunoNaLista(aluno, lista, alunos){
     removerAluno(li, removeLi, alunos, lista); // Acessar os métodos dentro da função removerAluno
 };
 
-export function editarLi(li, editLi, alunos, lista){
+export function editarLi(li, editLi, alunos, lista,){
 
     editLi.addEventListener("click", () => {
         const alunoId = li.dataset.id;
         const aluno = alunos.find(e => e.id == alunoId);
 
         const novoNome = prompt(`Digite o novo nome:`, aluno.nome); // aluno.nome, depois da virgula, é para exibir na caixa do prompt o nome que está salvo antes da alteração
-        const novaIdade = parseInt(prompt(`Digite o novo nome:`, aluno.idade));
+        const novaIdade = parseInt(prompt(`Digite a nova idade:`, aluno.idade));
         
         /* if(!novoNome || !novaIdade){
             alert("Preencha os campos corretamente")
@@ -70,9 +71,13 @@ export function editarLi(li, editLi, alunos, lista){
 
         localStorage.setItem("alunos", JSON.stringify(alunos));
 
-        somaEMedia(alunos, lista);
         renderAlunos(lista, alunos);
-        alert("Informações atualizadas com sucesso")
+        somaEMedia(alunos, lista);
+        
+        alert("Informações atualizadas com sucesso");
+        const input = document.getElementById("filtrar");
+        input.value = '';
+        
     })
 
 };
@@ -113,4 +118,17 @@ export function removerTudo(deletarTudo, lista, alunos){
     renderAlunos(lista, alunos);
     }
 });
+}
+
+export function renderFiltrados(lista, filtrados, alunos) {
+    lista.innerHTML = "";
+
+    if (!filtrados.length) {
+        const li = document.createElement("li");
+        li.textContent = "Nenhum aluno encontrado";
+        lista.appendChild(li);
+        return;
+    }
+
+    filtrados.forEach((e) => adicionarAlunoNaLista(e, lista, alunos));
 }
